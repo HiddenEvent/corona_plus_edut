@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:com/hyo/test.dart';
-import 'package:kakao_flutter_sdk/all.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Home 연결페이지'),
     );
   }
 }
@@ -59,6 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -72,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -91,23 +94,35 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
+          
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              '난 천재지',
             ),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
+
           ],
+
         ),
+
       ),
+
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed:(){
+          Navigator.of(context).push(
+          // 클릭하면 각 클래스 페이지 호출 **여기 고치세요~~
+            MaterialPageRoute(builder: (context) => HyoPage()));
+          }, // _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child:
+                Icon(Icons.add)
+
       ), // This trailing comma makes auto-formatting nicer for build methods.
+
     );
   }
 }
