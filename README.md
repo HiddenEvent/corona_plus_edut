@@ -1,16 +1,15 @@
-# com
+# 심심한데 코로나나?
 
-A new Flutter application.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 구조
+- models
+  - 디자인 패턴 provider 모델을 선택 하여 개발
+  - 데이터의 get과 set 구조 형식
+- services
+  - 데이터를 가공하여 처리해주는 공간
+- screens
+  - 사이트의 전체적인 레이아웃부터 부분부분에 대한 레이아웃을 설정해주는 부분
+- utilites
+  - 공통 상수들을 정리 해놓은 폴더
+  - 웹에서 css 같은 것들을 모아 놓는 것
+- widgets
+  - 위젯을 분리 해놓은 공간
