@@ -1,3 +1,4 @@
+import 'package:com/corona_data.dart';
 import 'package:com/corona_vo.dart';
 import 'package:com/screens/map/map_scrren.dart';
 import 'package:com/screens/mask/mask_screen.dart';
@@ -6,11 +7,13 @@ import 'package:com/utilities/constants.dart';
 import 'package:com/widgets/coronaInfo/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 
 class CoronaInfoScreen extends StatelessWidget {
   static String id = 'corona_info_screen';
 
   final coronaData;
+
   CoronaInfoScreen({this.coronaData});
 
   @override
@@ -25,7 +28,19 @@ class CoronaInfoScreen extends StatelessWidget {
             Expanded(
               flex: 1,
               child: MainCardWidget(
-                child: Text('하잉'),
+                child: Consumer<CoronaData>(
+                  builder: (context, coronaData, child) {
+                    return ListView.builder(
+                      itemBuilder: (context, index) {
+                        final task = coronaData.coronaDataList[index];
+                        return ListTile(
+                          title: Text(coronaData.coronaDataList[index].title),
+                        );
+                      },
+                      itemCount: coronaData.coronaDataList.length,
+                    );
+                  },
+                ),
               ),
             ),
             Expanded(

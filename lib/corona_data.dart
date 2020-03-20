@@ -15,4 +15,9 @@ class CoronaData extends ChangeNotifier{
     notifyListeners();
   }
 
+  void resetCoronaList () {
+    _coronaDataList.clear();
+    notifyListeners();
+  }
+
 }

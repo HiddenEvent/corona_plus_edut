@@ -24,6 +24,7 @@ class _CoronaInfoLoadingScreenState extends State<CoronaInfoLoadingScreen> {
 
   void getCoronaData() async {
     await CoronaInfoService().getCoronaInfo(coronaData);
+    print(coronaData.coronaDataList);
     Navigator.pop(context);
     Navigator.pushNamed(
       context,
