@@ -1,8 +1,9 @@
-import 'package:com/corona_data.dart';
-import 'package:com/corona_vo.dart';
+import 'package:com/models/coronainfo/corona_data.dart';
+import 'package:com/models/coronainfo/corona_vo.dart';
 import 'package:com/screens/map/map_scrren.dart';
 import 'package:com/screens/mask/mask_screen.dart';
 import 'package:com/screens/news/news_screen.dart';
+import 'package:com/services/corona_service.dart';
 import 'package:com/utilities/constants.dart';
 import 'package:com/widgets/coronaInfo/rounded_button.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,19 @@ import 'package:provider/provider.dart';
 
 class CoronaInfoScreen extends StatelessWidget {
   static String id = 'corona_info_screen';
+  CoronaInfoService coronaInfoService;
+  CoronaInfoScreen({this.coronaInfoService});
 
-  final coronaData;
-
-  CoronaInfoScreen({this.coronaData});
+//  void getCoronaData (BuildContext context) {
+//    var data = Provider.of<CoronaData>(context);
+//    print(data);
+//    print(Provider.of<CoronaData>(context).coronaDataList[0].totNum);
+//  }
 
   @override
   Widget build(BuildContext context) {
+
+//    getCoronaData(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -52,7 +59,9 @@ class CoronaInfoScreen extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, MaskScreen.id);
+
+                          print(Provider.of<CoronaData>(context).coronaDataList);
+//                          Navigator.pushNamed(context, MaskScreen.id);
                         },
                         child: MainCardWidget(
                           child: MiddleRow(
