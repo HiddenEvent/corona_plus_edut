@@ -10,11 +10,11 @@ class CoronaInfoService {
 //  BuildContext context;
 //  CoronaInfoService({this.context});
 
-  Future<dynamic> getCoronaAPIcallBack() async {
-
-    NetworkHelper networkHelper = NetworkHelper(coronaInfoURL);
-    var coronaJson = await networkHelper.getData();
-    if (coronaJson == null) return '데이터가 없음.';
+//  Future<dynamic> getCoronaAPIcallBack() async {
+//
+//    NetworkHelper networkHelper = NetworkHelper(coronaInfoURL);
+//    var coronaJson = await networkHelper.getData();
+//    if (coronaJson == null) return '데이터가 없음.';
 //    if (coronaData.coronaDataList.length != 0) coronaData.resetCoronaList();
 //    CoronaData data = CoronaData();
 //    for(var item in coronaJson['patient_status']){
@@ -22,13 +22,23 @@ class CoronaInfoService {
 //      data.addCoronaVO(CoronaVO(title: item['title'],totNum: item['tot_num'],beforeNum: item['before_num']));
 //
 //    }
-
-    return coronaJson['patient_status'];
-  }
-  void getCoronaData (BuildContext context) {
+//
+//    return coronaJson['patient_status'];
+//  }
+  Future<dynamic> getCoronaData (BuildContext context) async{
     var data = Provider.of<CoronaData>(context);
     print(data);
-    print(Provider.of<CoronaData>(context).coronaDataList[0].totNum);
+    NetworkHelper networkHelper = NetworkHelper(coronaInfoURL);
+    var coronaJson = await networkHelper.getData();
+    if (coronaJson == null) return '데이터가 없음.';
+//    if (coronaJson.coronaDataList.length != 0) coronaJson.resetCoronaList();
+
+    for(var item in coronaJson['patient_status']){
+      print(item);
+      data.addCoronaVO(CoronaVO(title: item['title'],totNum: item['tot_num'],beforeNum: item['before_num']));
+
+    }
+    return coronaJson['patient_status'];
   }
 
 }

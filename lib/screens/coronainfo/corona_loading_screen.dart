@@ -13,34 +13,36 @@ import 'package:provider/provider.dart';
 class CoronaInfoLoadingScreen extends StatefulWidget {
   static String id = 'corona_info_loding';
 
-
   @override
   _CoronaInfoLoadingScreenState createState() => _CoronaInfoLoadingScreenState();
 }
 
 class _CoronaInfoLoadingScreenState extends State<CoronaInfoLoadingScreen> {
   CoronaInfoService coronaInfoService = CoronaInfoService();
-
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-
+//    getCoronaData();
   }
 
-//  void didChangeDependencies() {
-//    super.didChangeDependencies();
-//    print(Provider.of<CoronaData>(context).coronaDataList[0].totNum);
-//    getCoronaData();
-//  }
+  @override
+  void didUpdateWidget(CoronaInfoLoadingScreen oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    print('언제?');
 
-  void getCoronaData()  async {
-    var coronaJson = await CoronaInfoService().getCoronaAPIcallBack();
+    getCoronaData(context);
+
+  }
+  void getCoronaData(BuildContext context)  async {
+    var coronaJson = await coronaInfoService.getCoronaData(context);
+    Navigator.pop(context);
     Navigator.pushNamed(context, CoronaInfoScreen.id, arguments: CoronaInfoScreen(coronaInfoService: coronaInfoService,));
   }
 
   @override
   Widget build(BuildContext context) {
-    coronaInfoService.getCoronaData(context);
     return Scaffold(
         body: Center(
           child: SpinKitDoubleBounce(
