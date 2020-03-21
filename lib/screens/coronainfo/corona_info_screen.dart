@@ -12,42 +12,31 @@ import 'package:provider/provider.dart';
 
 class CoronaInfoScreen extends StatelessWidget {
   static String id = 'corona_info_screen';
-  CoronaInfoService coronaInfoService;
+  final CoronaInfoService coronaInfoService;
   CoronaInfoScreen({this.coronaInfoService});
-
-//  void getCoronaData (BuildContext context) {
-//    var data = Provider.of<CoronaData>(context);
-//    print(data);
-//    print(Provider.of<CoronaData>(context).coronaDataList[0].totNum);
-//  }
 
   @override
   Widget build(BuildContext context) {
-
-//    getCoronaData(context);
     return Scaffold(
+      appBar: AppBar(
+        title: Text('data'),
+        backgroundColor: Colors.brown,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
               flex: 1,
               child: MainCardWidget(
-                child: Consumer<CoronaData>(
-                  builder: (context, coronaData, child) {
-                    return ListView.builder(
-                      itemBuilder: (context, index) {
-                        final task = coronaData.coronaDataList[index];
-                        return ListTile(
-                          title: Text(coronaData.coronaDataList[index].title),
-                        );
-                      },
-                      itemCount: coronaData.coronaDataList.length,
-                    );
-                  },
-                ),
+                child: Row(
+                  children: <Widget>[
+                    CoronaTopInfo(index: 0, colour: 0xff2a75e0,),
+                    CoronaTopInfo(index: 1, colour: 0xff123a91,),
+                    CoronaTopInfo(index: 2, colour: 0xff05afc8,),
+                    CoronaTopInfo(index: 3, colour: 0xff858585,),
+                  ],
+                )
               ),
             ),
             Expanded(
@@ -59,9 +48,7 @@ class CoronaInfoScreen extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-
-                          print(Provider.of<CoronaData>(context).coronaDataList);
-//                          Navigator.pushNamed(context, MaskScreen.id);
+                          Navigator.pushNamed(context, MaskScreen.id);
                         },
                         child: MainCardWidget(
                           child: MiddleRow(
@@ -109,6 +96,51 @@ class CoronaInfoScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CoronaTopInfo extends StatelessWidget {
+  final int colour;
+  final int index;
+  CoronaTopInfo({this.index,this.colour});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(colour),
+              ),
+              alignment: Alignment.bottomCenter,
+              child: Text('${Provider.of<CoronaData>(context).coronaDataList[index].title}', style: kCoronaTopTitleTextStyle),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color(colour),
+              ),
+              alignment: Alignment.center,
+              child: Text('${Provider.of<CoronaData>(context).coronaDataList[index].totNum}',style: kCoronaTopTotnumTextStyle,),
+
+            ),
+          ),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color(colour),
+              ),
+              child: Text('${Provider.of<CoronaData>(context).coronaDataList[index].beforeNum}', style: kCoronaTopBeforeTextStyle,),
+              alignment: Alignment.center,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -172,7 +204,6 @@ class MiddleRow extends StatelessWidget {
 
 class MainCardWidget extends StatelessWidget {
   final Widget child;
-
   MainCardWidget({this.child});
 
   @override
@@ -185,3 +216,18 @@ class MainCardWidget extends StatelessWidget {
     );
   }
 }
+
+//Consumer<CoronaData>(
+//builder: (context, coronaData, child) {
+//return ListView.builder(
+//itemBuilder: (context, index) {
+//final task = coronaData.coronaDataList[index];
+//return ListTile(
+//title: Text(coronaData.coronaDataList[index].title),
+//trailing: Text(coronaData.coronaDataList[index].totNum),
+//);
+//},
+//itemCount: coronaData.coronaDataList.length,
+//);
+//},
+//),

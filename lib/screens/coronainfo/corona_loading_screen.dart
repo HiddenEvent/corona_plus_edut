@@ -24,11 +24,11 @@ class _CoronaInfoLoadingScreenState extends State<CoronaInfoLoadingScreen> {
     // TODO: implement initState
     super.initState();
 //    getCoronaData();
+  print('이건');
   }
 
   @override
   void didUpdateWidget(CoronaInfoLoadingScreen oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     print('언제?');
 

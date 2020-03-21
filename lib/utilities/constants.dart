@@ -13,6 +13,23 @@ const kMidleSubTextStyle = TextStyle (
   fontWeight: FontWeight.w400,
   );
 
+const kCoronaTopTitleTextStyle = TextStyle (
+  fontSize: 17.0 ,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+const kCoronaTopTotnumTextStyle = TextStyle (
+  fontSize: 19.0 ,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+const kCoronaTopBeforeTextStyle = TextStyle (
+  fontSize: 12.0 ,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
+
+
 const kTextFieldInputDecoration = InputDecoration (
   filled: true ,
   fillColor: Colors.white ,
