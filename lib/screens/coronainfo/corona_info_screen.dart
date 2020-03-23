@@ -1,10 +1,14 @@
 import 'package:com/models/coronainfo/corona_data.dart';
 import 'package:com/models/coronainfo/corona_vo.dart';
 import 'package:com/screens/map/map_scrren.dart';
+import 'package:com/screens/mask/mask_loading_screen.dart';
 import 'package:com/screens/mask/mask_screen.dart';
 import 'package:com/screens/news/news_screen.dart';
 import 'package:com/services/corona_service.dart';
 import 'package:com/utilities/constants.dart';
+import 'package:com/widgets/coronaInfo/corona_topinfo_widget.dart';
+import 'package:com/widgets/coronaInfo/main_card_widget.dart';
+import 'package:com/widgets/coronaInfo/middle_row_widget.dart';
 import 'package:com/widgets/coronaInfo/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -20,7 +24,7 @@ class CoronaInfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('data'),
+        title: Text('코로나 디덱터'),
         backgroundColor: Colors.brown,
       ),
       backgroundColor: Colors.white,
@@ -60,7 +64,7 @@ class CoronaInfoScreen extends StatelessWidget {
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, MaskScreen.id);
+                          Navigator.pushNamed(context, MaskLoadingScreen.id);
                         },
                         child: MainCardWidget(
                           child: MiddleRow(
@@ -113,146 +117,7 @@ class CoronaInfoScreen extends StatelessWidget {
   }
 }
 
-class CoronaTopInfo extends StatelessWidget {
-  final int colour;
-  final int index;
 
-  CoronaTopInfo({this.index, this.colour});
 
-  @override
-  Widget build(BuildContext context) {
-    String title = Provider.of<CoronaData>(context).coronaDataList[index].title;
-    String totNum =
-        Provider.of<CoronaData>(context).coronaDataList[index].totNum;
-    String beforeNum =
-        Provider.of<CoronaData>(context).coronaDataList[index].beforeNum;
 
-    title = title.replaceAll('(', '\n(');
-    print(title);
 
-    return Expanded(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(colour),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
-                ),
-              ),
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                '$title',
-                style: kCoronaTopTitleTextStyle,
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(colour),
-              ),
-              alignment: Alignment.center,
-              child: Text(
-                '$totNum',
-                style: kCoronaTopTotnumTextStyle,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Color(colour),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10.0),
-                  bottomRight: Radius.circular(10.0),
-                ),
-              ),
-              child: Text(
-                '$beforeNum',
-                style: kCoronaTopBeforeTextStyle,
-              ),
-              alignment: Alignment.topCenter,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class MiddleRow extends StatelessWidget {
-  final String middleTitleText;
-  final String midleSubText;
-  final String middleImgUrl;
-
-  MiddleRow({this.middleTitleText, this.midleSubText, this.middleImgUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                flex: 7,
-                child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    middleTitleText,
-                    style: kMiddleTitleTextStyle,
-                  ),
-                  padding: EdgeInsets.only(left: 10.0, top: 10.0),
-                ),
-              ),
-              Expanded(
-                flex: 6,
-                child: Container(
-                  child: Text(
-                    midleSubText,
-                    style: kMidleSubTextStyle,
-                  ),
-                  padding: EdgeInsets.only(left: 10.0, top: 10.0),
-                ),
-              ),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(middleImgUrl),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MainCardWidget extends StatelessWidget {
-  final Widget child;
-
-  MainCardWidget({this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.white,
-      elevation: 2.0,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      child: child,
-    );
-  }
-}
