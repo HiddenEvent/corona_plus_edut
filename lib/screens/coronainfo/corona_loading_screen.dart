@@ -21,20 +21,14 @@ class _CoronaInfoLoadingScreenState extends State<CoronaInfoLoadingScreen> {
   CoronaInfoService coronaInfoService = CoronaInfoService();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-//    getCoronaData();
-  print('이건');
+    var newContext;
+    Future.delayed(Duration.zero).then((_) {
+      getCoronaData(context);
+    });
+//
   }
-
-  @override
-  void didUpdateWidget(CoronaInfoLoadingScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    print('언제?');
-
-    getCoronaData(context);
-
-  }
+//
   void getCoronaData(BuildContext context)  async {
     var coronaJson = await coronaInfoService.getCoronaData(context);
     Navigator.pop(context);
