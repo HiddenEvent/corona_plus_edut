@@ -18,6 +18,7 @@ class _MaskScreenState extends State<MaskScreen> {
     Position position = await Geolocator().getCurrentPosition
       (desiredAccuracy: LocationAccuracy.low);
     print(position);
+    //test
   }
 
   @override
